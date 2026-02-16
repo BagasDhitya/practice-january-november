@@ -1,0 +1,107 @@
+:root {
+    --purple: #733fc8;
+    --dark-gray: #49556b;
+    --light-gray: #f1f5f9;
+    --black: #18202d;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Barlow Semi Condensed";
+    background-color: #eef2f7;
+    color: #111;
+    letter-spacing: 0.3px;
+}
+
+.testimonial-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 1rem;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-header img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-header h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.card-header span {
+    font-size: 0.75rem;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.testimonial-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.4px;
+}
+
+.testimonial-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    letter-spacing: 0.35px;
+    opacity: 0.85;
+}
+
+/* Variants class dari customize root */
+.purple {
+    background-color: var(--purple);
+    color: white;
+}
+
+.dark {
+    background-color: var(--dark-gray);
+    color: white;
+}
+
+.black {
+    background-color: var(--black);
+    color: white;
+}
+
+.light {
+    background-color: var(--light-gray);
+    color: #111;
+}
+
+.white {
+    background-color: var(--white);
+    color: #111
+}
