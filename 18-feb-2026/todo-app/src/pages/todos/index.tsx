@@ -7,6 +7,7 @@ import { useTodos } from "../../hooks/useTodos"
 
 export default function Todos() {
   const { toggleDarkMode } = useDarkMode()
+
   const {
     todos,
     filter,
@@ -15,9 +16,14 @@ export default function Todos() {
     toggleTodo,
     deleteTodo,
     clearCompleted,
-    setSearch
+    setSearch,
+    editingId,
+    editingTitle,
+    setEditingTitle,
+    startEditing,
+    cancelEditing,
+    saveEditing
   } = useTodos()
-
 
   return (
     <div className="min-h-screen bg-gradient-to-b 
@@ -42,7 +48,8 @@ export default function Todos() {
                 key={todo.id}
                 className="flex items-center justify-between px-6 py-4"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-1">
+                  {/* Toggle Button */}
                   <button
                     onClick={() => toggleTodo(todo.id)}
                     className={`w-5 h-5 rounded-full border
@@ -51,21 +58,43 @@ export default function Todos() {
                         : "border-muted-foreground"}
                     `}
                   />
-                  <span
-                    className={todo.completed
-                      ? "line-through text-muted-foreground"
-                      : ""}
-                  >
-                    {todo.title}
-                  </span>
+
+                  {/* Editable Title */}
+                  {editingId === todo.id ? (
+                    <input
+                      autoFocus
+                      value={editingTitle}
+                      onChange={(e) => setEditingTitle(e.target.value)}
+                      onBlur={() => saveEditing(todo.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") saveEditing(todo.id)
+                        if (e.key === "Escape") cancelEditing()
+                      }}
+                      className="flex-1 bg-transparent border-b outline-none"
+                    />
+                  ) : (
+                    <span
+                      onDoubleClick={() => startEditing(todo.id, todo.title)}
+                      className={`flex-1 cursor-pointer
+                        ${todo.completed
+                          ? "line-through text-muted-foreground"
+                          : ""}
+                      `}
+                    >
+                      {todo.title}
+                    </span>
+                  )}
                 </div>
 
-                <button
-                  onClick={() => deleteTodo(todo.id)}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  ✕
-                </button>
+                {/* Delete Button */}
+                {editingId !== todo.id && (
+                  <button
+                    onClick={() => deleteTodo(todo.id)}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    ✕
+                  </button>
+                )}
               </div>
             ))}
           </CardContent>
@@ -88,7 +117,7 @@ export default function Todos() {
         </div>
 
         <p className="text-center text-sm text-muted-foreground pt-4">
-          Drag and drop to reorder list
+          Double click to edit a todo
         </p>
       </div>
     </div>

@@ -20,39 +20,88 @@ export function useTodos() {
   const [filter, setFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
 
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingTitle, setEditingTitle] = useState("");
+
   /* ================= CRUD ================= */
 
-  const toggleTodo = (id: number) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
-  };
+  function toggleTodo(id: number) {
+    setTodos(function (prev) {
+      return prev.map(function (todo) {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      });
+    });
+  }
 
-  const deleteTodo = (id: number) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  };
+  function deleteTodo(id: number) {
+    setTodos(function (prev) {
+      return prev.filter(function (todo) {
+        return todo.id !== id;
+      });
+    });
+  }
 
-  const clearCompleted = () => {
-    setTodos((prev) => prev.filter((todo) => !todo.completed));
-  };
+  function clearCompleted() {
+    setTodos(function (prev) {
+      return prev.filter(function (todo) {
+        return !todo.completed;
+      });
+    });
+  }
+
+  /* ================= EDIT ================= */
+
+  function startEditing(id: number, currentTitle: string) {
+    setEditingId(id);
+    setEditingTitle(currentTitle);
+  }
+
+  function cancelEditing() {
+    setEditingId(null);
+    setEditingTitle("");
+  }
+
+  function saveEditing(id: number) {
+    if (!editingTitle.trim()) {
+      cancelEditing();
+      return;
+    }
+
+    setTodos(function (prev) {
+      return prev.map(function (todo) {
+        if (todo.id === id) {
+          return { ...todo, title: editingTitle };
+        }
+        return todo;
+      });
+    });
+
+    cancelEditing();
+  }
 
   /* ================= FILTER + SEARCH ================= */
 
-  const filteredTodos = useMemo(() => {
-    return todos
-      .filter((todo) => {
-        if (filter === "active") return !todo.completed;
-        if (filter === "completed") return todo.completed;
-        return true;
-      })
-      .filter((todo) =>
-        todo.title.toLowerCase().includes(search.toLowerCase()),
-      );
-  }, [todos, filter, search]);
+  const filteredTodos = useMemo(
+    function () {
+      return todos
+        .filter(function (todo) {
+          if (filter === "active") return !todo.completed;
+          if (filter === "completed") return todo.completed;
+          return true;
+        })
+        .filter(function (todo) {
+          return todo.title.toLowerCase().includes(search.toLowerCase());
+        });
+    },
+    [todos, filter, search],
+  );
 
-  const itemsLeft = todos.filter((todo) => !todo.completed).length;
+  const itemsLeft = todos.filter(function (todo) {
+    return !todo.completed;
+  }).length;
 
   return {
     todos: filteredTodos,
@@ -64,5 +113,11 @@ export function useTodos() {
     toggleTodo,
     deleteTodo,
     clearCompleted,
+    editingId,
+    editingTitle,
+    setEditingTitle,
+    startEditing,
+    cancelEditing,
+    saveEditing,
   };
 }
