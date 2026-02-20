@@ -24,6 +24,20 @@ export function useTodos() {
   const [editingTitle, setEditingTitle] = useState("");
 
   /* ================= CRUD ================= */
+  function addTodo(title: string) {
+    if (!title.trim()) return;
+
+    setTodos((prev) => {
+      return [
+        {
+          id: Date.now(),
+          title,
+          completed: false,
+        },
+        ...prev,
+      ];
+    });
+  }
 
   function toggleTodo(id: number) {
     setTodos(function (prev) {
@@ -119,5 +133,6 @@ export function useTodos() {
     startEditing,
     cancelEditing,
     saveEditing,
+    addTodo,
   };
 }

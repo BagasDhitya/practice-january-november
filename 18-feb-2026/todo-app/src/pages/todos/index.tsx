@@ -1,5 +1,5 @@
 import { Card, CardContent } from "../../components/ui/card"
-import { SearchInput } from "../../components/SearchInput"
+import { TodoInput } from "../../components/TodoInput"
 import { ThemeToggle } from "../../components/ThemeToggle"
 import { TodoFilters } from "../../components/TodoFilters"
 import { useDarkMode } from "../../hooks/useDarkMode"
@@ -22,7 +22,8 @@ export default function Todos() {
     setEditingTitle,
     startEditing,
     cancelEditing,
-    saveEditing
+    saveEditing,
+    addTodo
   } = useTodos()
 
   return (
@@ -39,7 +40,7 @@ export default function Todos() {
 
       {/* CONTENT */}
       <div className="max-w-3xl mx-auto px-4 -mt-6 space-y-6">
-        <SearchInput onSearch={setSearch} />
+        <TodoInput onAdd={addTodo} onSearch={setSearch} />
 
         <Card className="shadow-xl">
           <CardContent className="p-0 divide-y">
