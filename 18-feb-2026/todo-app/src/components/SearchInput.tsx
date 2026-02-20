@@ -1,20 +1,24 @@
 import { Input } from "./ui/input"
 import { useEffect, useState } from "react"
 
-export function SearchInput() {
+type Props = {
+    onSearch: (value: string) => void
+}
+
+export function SearchInput({ onSearch }: Props) {
     const [value, setValue] = useState("")
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            console.log("Search:", value) // nanti ganti logic
+            onSearch(value)
         }, 400)
 
         return () => clearTimeout(timeout)
-    }, [value])
+    }, [value, onSearch])
 
     return (
         <Input
-            placeholder="Currently typing"
+            placeholder="Search todo..."
             value={value}
             onChange={(e) => setValue(e.target.value)}
             className="h-12 bg-background dark:bg-muted"
