@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import Home from "./pages/home"
 import Todos from "./pages/todos"
 import Login from "./pages/login"
+import TodoPlaceholder from "./pages/todo-placeholder"
 
 import PrivateRoute from "./components/PrivateRoute"
 
@@ -14,6 +15,7 @@ function App() {
           <Todos />
         </PrivateRoute>
       } />
+      <Route path="/todo-placeholder" element={<TodoPlaceholder />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   )
