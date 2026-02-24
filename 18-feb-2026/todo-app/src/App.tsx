@@ -5,6 +5,7 @@ import Todos from "./pages/todos"
 import Login from "./pages/login"
 import TodoPlaceholder from "./pages/todo-placeholder"
 import PrivateRoute from "./components/PrivateRoute"
+import StateExample from "./pages/state-example"
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
   {
     path: "/todo-placeholder",
     element: <TodoPlaceholder />,
+  },
+  {
+    path: "/state-example",
+    element: <StateExample />
   },
   {
     path: "/login",
