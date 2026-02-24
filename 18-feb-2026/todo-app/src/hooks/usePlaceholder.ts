@@ -17,6 +17,8 @@ export function usePlaceholder() {
       }, 3000);
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   }
 

@@ -7,12 +7,9 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    console.log("before login ; ", user)
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         await login(email, password)
-        console.log("after login ; ", user)
     }
 
     return (
