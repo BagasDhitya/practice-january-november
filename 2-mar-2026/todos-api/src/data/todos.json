@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Learn Express",
+    "description": "Understand basic routing and middleware",
+    "category": "Programming",
+    "isCompleted": false,
+    "createdAt": "2026-03-01T10:00:00.000Z",
+    "updatedAt": null,
+    "deletedAt": null
+  },
+  {
+    "id": 2,
+    "title": "Workout",
+    "description": "30 minutes cardio session",
+    "category": "Health",
+    "isCompleted": false,
+    "createdAt": "2026-03-01T12:00:00.000Z",
+    "updatedAt": null,
+    "deletedAt": "2026-03-02T03:37:29.815Z"
+  },
+  {
+    "id": 3,
+    "title": "Going to gym",
+    "description": "Workout for 60 minutes",
+    "category": "Health",
+    "isCompleted": false,
+    "createdAt": "2026-03-02T03:36:04.209Z",
+    "updatedAt": null,
+    "deletedAt": null
+  }
+]
