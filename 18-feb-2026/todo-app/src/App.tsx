@@ -6,6 +6,7 @@ import Login from "./pages/login"
 import TodoPlaceholder from "./pages/todo-placeholder"
 import PrivateRoute from "./components/PrivateRoute"
 import StateExample from "./pages/state-example"
+import Catalog from "./pages/catalog"
 
 export const router = createBrowserRouter([
   {
@@ -32,4 +33,8 @@ export const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path: '/catalog',
+    element: <Catalog />
+  }
 ])

@@ -5,6 +5,7 @@ export function usePlaceholder() {
   const [todosPlaceholder, setTodosPlaceholder] = useState<[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [click, setClick] = useState<string>("");
 
   async function getTodoPlaceholder() {
     setLoading(true);
@@ -24,11 +25,12 @@ export function usePlaceholder() {
 
   useEffect(() => {
     getTodoPlaceholder();
-  }, []);
+  }, [click]);
 
   return {
     todosPlaceholder,
     loading,
     error,
+    setClick,
   };
 }
