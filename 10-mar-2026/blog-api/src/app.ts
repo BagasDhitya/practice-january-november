@@ -1,9 +1,18 @@
 import express from "express";
 import userRouter from "./routers/user.route";
 import postRouter from "./routers/post.route";
+import cors from "cors";
 
 const app = express();
 const PORT = 3000;
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // blog web
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  }),
+);
 
 app.use(express.json());
 
